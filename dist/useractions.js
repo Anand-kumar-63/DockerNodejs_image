@@ -1,4 +1,4 @@
-import { userModel } from "./db";
+import { userModel } from "./db.js";
 export const adduser = async (req, res) => {
     const { name, email, age } = req.body;
     try {
