@@ -1,4 +1,4 @@
-import { userModel } from "./db";
+import { userModel } from "./db.js";
 import { Request, Response } from "express";
 export const adduser = async (req: Request, res: Response) => {
   const { name, email, age } = req.body;
