@@ -1,14 +1,20 @@
 import mongoose, { Schema, model } from "mongoose";
-import { error } from "node:console";
-const mongoURL: string = "mongodb://localhost:27017/myDatabase";
+import dotenv from "dotenv";
+dotenv.config();
+
+const mongoURL: string = process.env.MONGO_URL || "mongodb://localhost:27017/myDatabase";
+
+if (!process.env.MONGO_URL) {
+  console.warn("⚠️  MONGO_URL env variable not set — falling back to localhost (will fail inside Docker)");
+}
 
 // connect to mongodb
 mongoose
   .connect(mongoURL)
   .then(() => {
-    console.log("MongoDb connected");
+    console.log("MongoDb connected to:", mongoURL);
   })
-  .catch((err) => console.error("Mongodb connection error:", error));
+  .catch((err) => console.error("Mongodb connection error:", err));
 
 // user models
 interface Iuser {
